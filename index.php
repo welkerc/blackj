@@ -15,7 +15,7 @@
     
     echo 'You have the ' . $deck1 . ' of ' . $suit1 . ' and ' . $deck2 . ' of ' . $suit2 . '.' . "<br /><br />";
     
-    echo  'You have ' . $tp;ß
+    echo  'You have ' . $tp;
 
     ?>
 </p>
