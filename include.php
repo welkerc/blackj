@@ -8,17 +8,4 @@ $sql = "SELECT * FROM `blackj` WHERE 1 LIMIT 0, 52 ";
 
 $db = mysql_connect($hn,$un,$pw);
 
-mysql_select_db($dbn) or die("Unable to select database");
-
-$result = mysql_query($sql, $db) or die("Unable to select: ".mysql_error());
-print "<table>\n";
-while($row = mysql_fetch_row($result)) {
-    print "<tr>\n";
-    foreach($row as $field) {
-        print "<td>$field</td>\n";
-    }
-    print "</tr>\n";
-}
-print "</table>\n";
-mysql_close($link);
 ?>
