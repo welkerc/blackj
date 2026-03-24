@@ -52,6 +52,66 @@
             </a>
         </div>
 
+        <section class="rules-section">
+            <h2>Game Rules</h2>
+            
+            <div class="rules-accordion">
+                <button class="rules-header" onclick="toggleRules('blackjack-rules')">
+                    <span>🃏 Blackjack Rules</span>
+                    <span class="arrow">▼</span>
+                </button>
+                <div id="blackjack-rules" class="rules-content hidden">
+                    <p><strong>Objective:</strong> Get as close to 21 as possible without going over.</p>
+                    <ul>
+                        <li><strong>Card Values:</strong> Number cards = face value, Face cards (J, Q, K) = 10, Ace = 1 or 11</li>
+                        <li><strong>Hit:</strong> Draw another card</li>
+                        <li><strong>Stand:</strong> Keep your current hand</li>
+                        <li><strong>Double Down:</strong> Double your bet, get one more card, then stand</li>
+                        <li><strong>Split:</strong> If you have two cards of the same value, split into two hands</li>
+                        <li><strong>Blackjack:</strong> Ace + 10/J/Q/K on first two cards = 3:2 payout</li>
+                        <li><strong>Dealer:</strong> Must hit on 16 or less, stand on 17+</li>
+                        <li><strong>Bust:</strong> Going over 21 = lose</li>
+                    </ul>
+                    <p><strong>Betting:</strong> $1 - $100 per hand | Starting bankroll: $1,000</p>
+                </div>
+
+                <button class="rules-header" onclick="toggleRules('war-rules')">
+                    <span>⚔️ War Rules</span>
+                    <span class="arrow">▼</span>
+                </button>
+                <div id="war-rules" class="rules-content hidden">
+                    <p><strong>Objective:</strong> Win all 52 cards by having the higher card.</p>
+                    <ul>
+                        <li><strong>Gameplay:</strong> Each player flips the top card of their deck</li>
+                        <li><strong>Higher Card Wins:</strong> The player with the higher card takes both</li>
+                        <li><strong>Tie = War:</strong> When cards match, each player puts 3 cards face-down + 1 face-up</li>
+                        <li><strong>War Winner:</strong> The player with the higher face-up card wins all cards in the war</li>
+                        <li><strong>Double War:</strong> If there's another tie during war, the war continues</li>
+                        <li><strong>Game End:</strong> One player has all cards, or a player runs out</li>
+                    </ul>
+                    <p><strong>Tip:</strong> Wars can accumulate quickly - keep track of the pile!</p>
+                </div>
+
+                <button class="rules-header" onclick="toggleRules('cleardeck-rules')">
+                    <span>🚀 Clear the Deck Rules</span>
+                    <span class="arrow">▼</span>
+                </button>
+                <div id="cleardeck-rules" class="rules-content hidden">
+                    <p><strong>Objective:</strong> Be the first to play all 20 cards.</p>
+                    <ul>
+                        <li><strong>Setup:</strong> Each player gets 20 cards (4 face-down, 4 face-up, 12 in hand)</li>
+                        <li><strong>Card Values:</strong> Ace=1, 2-10=face value, J=11, Q=12, K=13 (King is high)</li>
+                        <li><strong>Play Rules:</strong> Play cards of equal or LESSER value than the pile</li>
+                        <li><strong>Clear the Deck:</strong> Play 4+ cards of the same value to clear the pile + get another turn</li>
+                        <li><strong>Higher Value:</strong> Playing higher value forces you to take the pile + get another turn</li>
+                        <li><strong>Wild Tens:</strong> Tens can clear the deck at any time, but count as 25 points if held at end</li>
+                        <li><strong>Scoring:</strong> Cards remaining = points (10s = 25 pts). Lowest score wins!</li>
+                    </ul>
+                    <p><strong>Tip:</strong> Save those tens until you need them!</p>
+                </div>
+            </div>
+        </section>
+
         <footer>
             <p>Choose a game above to start playing</p>
         </footer>
@@ -207,6 +267,96 @@
             color: var(--text-muted);
         }
 
+        .rules-section {
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--bg-card);
+        }
+
+        .rules-section h2 {
+            text-align: center;
+            color: var(--accent-gold);
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .rules-accordion {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .rules-header {
+            width: 100%;
+            background: var(--bg-card);
+            border: none;
+            padding: 1rem 1.5rem;
+            color: var(--text-light);
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-radius: 10px;
+            margin-bottom: 0.5rem;
+            transition: all 0.2s ease;
+        }
+
+        .rules-header:hover {
+            background: var(--bg-darker);
+            border-left: 4px solid var(--accent-gold);
+        }
+
+        .rules-header .arrow {
+            transition: transform 0.3s ease;
+            color: var(--accent-gold);
+        }
+
+        .rules-header.active .arrow {
+            transform: rotate(180deg);
+        }
+
+        .rules-content {
+            background: var(--bg-darker);
+            padding: 1.5rem;
+            border-radius: 0 0 10px 10px;
+            margin-bottom: 1rem;
+            border-left: 4px solid var(--accent-green);
+        }
+
+        .rules-content p {
+            margin-bottom: 1rem;
+            color: var(--text-light);
+        }
+
+        .rules-content ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .rules-content li {
+            padding: 0.5rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+            color: var(--text-muted);
+        }
+
+        .rules-content li::before {
+            content: "•";
+            color: var(--accent-gold);
+            position: absolute;
+            left: 0;
+            font-weight: bold;
+        }
+
+        .rules-content strong {
+            color: var(--accent-gold);
+        }
+
+        .hidden {
+            display: none;
+        }
+
         @media (max-width: 600px) {
             h1 {
                 font-size: 2rem;
@@ -225,5 +375,19 @@
             }
         }
     </style>
+    <script>
+        function toggleRules(id) {
+            const content = document.getElementById(id);
+            const header = content.previousElementSibling;
+            
+            if (content.classList.contains('hidden')) {
+                content.classList.remove('hidden');
+                header.classList.add('active');
+            } else {
+                content.classList.add('hidden');
+                header.classList.remove('active');
+            }
+        }
+    </script>
 </body>
 </html>
