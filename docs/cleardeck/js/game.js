@@ -228,7 +228,9 @@ function renderPlayerCards() {
     document.getElementById('face-up').innerHTML = player.faceUp.map((card, i) => {
         const isRed = card.suit === '♥' || card.suit === '♦';
         const isWild = card.isWild;
-        return `<div class="card ${isRed ? 'red' : 'black'} ${isWild ? 'wild' : ''} ${isCardPlayable(card, 'faceUp', i) ? '' : 'disabled'}" 
+        const isSelected = gameState.selectedCards.some(c => c.zone === 'faceUp' && c.index === i);
+        const playable = isCardPlayable(card, 'faceUp', i);
+        return `<div class="card ${isRed ? 'red' : 'black'} ${isWild ? 'wild' : ''} ${isSelected ? 'selected' : ''} ${!playable && !isWild ? 'disabled' : ''}" 
             data-zone="faceUp" data-index="${i}" data-rank="${card.rank}">${card.rank}<br>${card.suit}</div>`;
     }).join('');
     
@@ -319,10 +321,6 @@ function handleCardClick(cardEl) {
     
     if (existingRank && existingRank !== rank) {
         gameState.selectedCards = [];
-    }
-    
-    if (zone === 'hand') {
-        player.hand[index].selected = !player.hand[index].selected;
     }
     
     const isSelected = gameState.selectedCards.some(c => c.zone === zone && c.index === index);
