@@ -110,6 +110,8 @@ function drawCards() {
         return;
     }
     
+    if (gameState.isWar) return;
+    
     const playerCard = gameState.playerDeck.shift();
     const dealerCard = gameState.dealerDeck.shift();
     
@@ -186,22 +188,19 @@ function triggerWar() {
 }
 
 function executeWar() {
-    const playerNeeded = gameState.isWar ? 4 : 1;
-    const dealerNeeded = gameState.isWar ? 4 : 1;
+    if (!gameState.isWar) return;
     
-    if (gameState.playerDeck.length < playerNeeded || gameState.dealerDeck.length < dealerNeeded) {
+    if (gameState.playerDeck.length < 4 || gameState.dealerDeck.length < 4) {
         handleInsufficientCards();
         return;
     }
     
-    if (gameState.isWar) {
-        for (let i = 0; i < 3; i++) {
-            if (gameState.playerDeck.length > 0) {
-                gameState.warPile.push(gameState.playerDeck.shift());
-            }
-            if (gameState.dealerDeck.length > 0) {
-                gameState.warPile.push(gameState.dealerDeck.shift());
-            }
+    for (let i = 0; i < 3; i++) {
+        if (gameState.playerDeck.length > 0) {
+            gameState.warPile.push(gameState.playerDeck.shift());
+        }
+        if (gameState.dealerDeck.length > 0) {
+            gameState.warPile.push(gameState.dealerDeck.shift());
         }
     }
     
