@@ -9,7 +9,7 @@ A collection of browser-based card games with a dark theme.
 ### Blackjack
 A classic casino card game with betting and strategy.
 
-**Play:** [https://welkerc.github.io/blackj/blackjack/](https://welkerc.github.io/blackj/blackjack/)
+**Play:** [https://welkerc.github.io/CardGames/blackjack/](https://welkerc.github.io/CardGames/blackjack/)
 
 **Features:**
 - Full 52-card deck
@@ -30,7 +30,7 @@ A classic casino card game with betting and strategy.
 ### War
 A simple card game of luck vs the dealer.
 
-**Play:** [https://welkerc.github.io/blackj/war/](https://welkerc.github.io/blackj/war/)
+**Play:** [https://welkerc.github.io/CardGames/war/](https://welkerc.github.io/CardGames/war/)
 
 **Features:**
 - Full 52-card deck
@@ -46,11 +46,33 @@ A simple card game of luck vs the dealer.
 
 ---
 
+### Clear the Deck
+A fast-paced card game where you race to play all your cards.
+
+**Play:** [https://welkerc.github.io/CardGames/cleardeck/](https://welkerc.github.io/CardGames/cleardeck/)
+
+**Features:**
+- Solo or vs AI opponents
+- Full game rules with face-down/face-up cards
+- Clear the Deck mechanic (4+ same value)
+- Wild tens (clear deck, but 25 points if held)
+- Multi-round scoring
+- Lowest score wins
+
+**Rules:**
+- Play cards matching or lower than previous play
+- 4+ of same value clears the deck
+- Higher value = take the pile
+- Tens are wild (25 points if held at end)
+
+---
+
 ## Play Locally
 
 Open any game folder in a browser:
 - `blackjack/index.html`
 - `war/index.html`
+- `cleardeck/index.html`
 
 ## GitHub Pages
 
@@ -60,8 +82,9 @@ This repo is configured for GitHub Pages hosting.
 2. Go to Repository Settings → Pages
 3. Source: Deploy from a branch → `main` / `docs` folder
 4. Access games at:
-   - `https://yourusername.github.io/blackj/blackjack/`
-   - `https://yourusername.github.io/blackj/war/`
+   - `https://welkerc.github.io/CardGames/blackjack/`
+   - `https://welkerc.github.io/CardGames/war/`
+   - `https://welkerc.github.io/CardGames/cleardeck/`
 
 ## Tech Stack
 

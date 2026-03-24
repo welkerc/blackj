@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clear the Deck</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="game-container">
+        <header>
+            <h1>Clear the Deck</h1>
+            <div class="header-stats">
+                <span>Round: <span id="round">1</span></span>
+                <span>Your Score: <span id="player-score">0</span></span>
+            </div>
+        </header>
+
+        <div id="mode-select" class="mode-select">
+            <h2>Select Game Mode</h2>
+            <div class="mode-buttons">
+                <button class="btn btn-primary btn-lg" id="solo-btn">Solo Challenge</button>
+                <button class="btn btn-gold btn-lg" id="vs-ai-btn">vs AI</button>
+            </div>
+            <div id="ai-select" class="ai-select hidden">
+                <h3>Select Number of AI Opponents</h3>
+                <div class="ai-buttons">
+                    <button class="btn btn-secondary" data-ai="2">2 AI</button>
+                    <button class="btn btn-secondary" data-ai="3">3 AI</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="game-area" class="hidden">
+            <div class="ai-players" id="ai-players"></div>
+            
+            <div class="center-area">
+                <div class="pile-display">
+                    <h3>Center Pile</h3>
+                    <div class="pile-cards" id="pile-cards"></div>
+                    <div class="pile-value">Value: <span id="pile-value">-</span></div>
+                </div>
+                <div id="message" class="message"></div>
+            </div>
+
+            <div class="player-area">
+                <h3>Your Cards <span id="cards-remaining">(20)</span></h3>
+                
+                <div class="player-cards">
+                    <div class="card-zone">
+                        <h4>Face Down <span id="fd-count">(4)</span></h4>
+                        <div class="card-row" id="face-down"></div>
+                    </div>
+                    <div class="card-zone">
+                        <h4>Face Up <span id="fu-count">(4)</span></h4>
+                        <div class="card-row" id="face-up"></div>
+                    </div>
+                    <div class="card-zone">
+                        <h4>Hand <span id="hand-count">(12)</span></h4>
+                        <div class="card-row hand-row" id="hand"></div>
+                    </div>
+                </div>
+
+                <div class="player-actions">
+                    <button id="play-btn" class="btn btn-primary" disabled>Play Selected</button>
+                    <button id="clear-btn" class="btn btn-gold" disabled>Clear Deck!</button>
+                    <button id="take-pile-btn" class="btn btn-secondary hidden">Take Pile</button>
+                </div>
+                <button id="end-game-btn" class="btn btn-secondary mt-2">End Game / Show Scores</button>
+            </div>
+        </div>
+
+        <div id="score-modal" class="modal hidden">
+            <div class="modal-content">
+                <h2>Round Results</h2>
+                <div id="round-scores"></div>
+                <h3>Total Scores</h3>
+                <div id="total-scores"></div>
+                <button id="next-round-btn" class="btn btn-primary">Next Round</button>
+                <button id="new-game-btn" class="btn btn-secondary">New Game</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/game.js"></script>
+</body>
+</html>
