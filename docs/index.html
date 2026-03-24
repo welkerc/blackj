@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blackjack</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="game-container">
+        <header>
+            <h1>Blackjack</h1>
+            <div class="bankroll">
+                <span>Bankroll: $</span><span id="bankroll">1000</span>
+            </div>
+        </header>
+
+        <div class="stats-bar">
+            <div class="stat">
+                <span class="stat-label">Hands:</span>
+                <span id="hands-played">0</span>
+            </div>
+            <div class="stat">
+                <span class="stat-label">Won:</span>
+                <span id="hands-won">0</span>
+            </div>
+            <div class="stat">
+                <span class="stat-label">Lost:</span>
+                <span id="hands-lost">0</span>
+            </div>
+        </div>
+
+        <div class="game-area">
+            <div class="dealer-section">
+                <h2>Dealer <span id="dealer-score"></span></h2>
+                <div id="dealer-cards" class="card-area"></div>
+            </div>
+
+            <div class="message-area">
+                <p id="message"></p>
+            </div>
+
+            <div class="player-section">
+                <h2>You <span id="player-score"></span></h2>
+                <div id="player-cards" class="card-area"></div>
+            </div>
+        </div>
+
+        <div class="bet-area" id="bet-area">
+            <h3>Place Your Bet</h3>
+            <div class="chip-tray">
+                <button class="chip" data-value="1">$1</button>
+                <button class="chip" data-value="5">$5</button>
+                <button class="chip" data-value="25">$25</button>
+                <button class="chip" data-value="50">$50</button>
+                <button class="chip" data-value="100">$100</button>
+            </div>
+            <div class="current-bet">
+                <span>Current Bet: $</span><span id="current-bet">0</span>
+            </div>
+            <button id="clear-bet" class="btn btn-secondary">Clear</button>
+            <button id="deal-btn" class="btn btn-primary" disabled>Deal</button>
+        </div>
+
+        <div class="action-area hidden" id="action-area">
+            <button id="hit-btn" class="btn btn-primary">Hit</button>
+            <button id="stand-btn" class="btn btn-secondary">Stand</button>
+            <button id="double-btn" class="btn btn-gold" data-action="double">Double</button>
+            <button id="split-btn" class="btn btn-gold hidden" data-action="split">Split</button>
+        </div>
+
+        <div class="result-area hidden" id="result-area">
+            <button id="new-game-btn" class="btn btn-primary">New Hand</button>
+        </div>
+    </div>
+
+    <script src="js/game.js"></script>
+</body>
+</html>
