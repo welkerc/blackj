@@ -1,0 +1,7 @@
+jekyll_theme: false
+plugins: []
+markdown: kramdown
+kramdown:
+  input: GFM
+  syntax_highlighter_opts:
+    disable: true

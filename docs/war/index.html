@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>War</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <style>
+        body {
+            min-height: 100vh;
+        }
+        
+        .war-container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 1rem;
+        }
+        
+        .player-area {
+            background: var(--bg-card);
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+        
+        .player-area h2 {
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            color: var(--text-muted);
+        }
+        
+        .card-count {
+            font-size: 1.5rem;
+            color: var(--accent-gold);
+            margin-top: 0.5rem;
+        }
+        
+        .battle-area {
+            background: var(--bg-darker);
+            border-radius: 10px;
+            padding: 2rem;
+            margin-bottom: 1rem;
+            min-height: 200px;
+        }
+        
+        .battle-cards {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .battle-slot {
+            width: 80px;
+            height: 112px;
+            border: 2px dashed var(--text-muted);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-muted);
+        }
+        
+        .battle-slot .card {
+            position: relative;
+            animation: flipCard 0.5s ease-out;
+        }
+        
+        @keyframes flipCard {
+            0% {
+                transform: rotateY(180deg);
+                opacity: 0;
+            }
+            100% {
+                transform: rotateY(0);
+                opacity: 1;
+            }
+        }
+        
+        .battle-result {
+            text-align: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+            min-height: 40px;
+        }
+        
+        .war-pile {
+            text-align: center;
+            margin-top: 1rem;
+            padding: 1rem;
+            background: rgba(255, 215, 0, 0.1);
+            border-radius: 8px;
+        }
+        
+        .war-pile span {
+            color: var(--accent-gold);
+        }
+        
+        .controls {
+            text-align: center;
+            margin-top: 1rem;
+        }
+        
+        .cards-remaining {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 1rem;
+            padding: 1rem;
+            background: var(--bg-card);
+            border-radius: 10px;
+        }
+        
+        .card-stat {
+            text-align: center;
+        }
+        
+        .card-stat .count {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--accent-green);
+        }
+        
+        .card-stat .label {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+        
+        .vs-text {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--accent-red);
+            align-self: center;
+        }
+        
+        .game-over {
+            text-align: center;
+            padding: 2rem;
+        }
+        
+        .game-over h2 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+        
+        .game-over.winner {
+            color: var(--accent-green);
+        }
+        
+        .game-over.loser {
+            color: var(--accent-red);
+        }
+        
+        @media (max-width: 600px) {
+            .battle-cards {
+                gap: 1rem;
+            }
+            
+            .battle-slot {
+                width: 65px;
+                height: 91px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="war-container">
+        <header>
+            <h1>War</h1>
+            <div class="bankroll">
+                <span>Rounds Won: </span><span id="rounds-won">0</span>
+            </div>
+        </header>
+
+        <div class="game-area">
+            <div class="player-area">
+                <h2>Your Cards: <span id="player-count" class="card-count">0</span></h2>
+                <div id="player-card-slot" class="battle-slot"></div>
+            </div>
+
+            <div class="battle-area">
+                <div class="battle-cards">
+                    <div class="battle-slot" id="player-battle"></div>
+                    <span class="vs-text">VS</span>
+                    <div class="battle-slot" id="dealer-battle"></div>
+                </div>
+                <div class="battle-result" id="battle-result"></div>
+                <div class="war-pile hidden" id="war-pile">
+                    <span id="war-count">0</span> cards in the war pile
+                </div>
+            </div>
+
+            <div class="player-area">
+                <h2>Computer Cards: <span id="dealer-count" class="card-count">0</span></h2>
+                <div id="dealer-card-slot" class="battle-slot"></div>
+            </div>
+        </div>
+
+        <div class="controls">
+            <button id="play-btn" class="btn btn-primary btn-lg">Draw Card</button>
+            <button id="restart-btn" class="btn btn-secondary btn-lg hidden">Play Again</button>
+        </div>
+
+        <div class="cards-remaining">
+            <div class="card-stat">
+                <div class="count" id="total-rounds">0</div>
+                <div class="label">Total Rounds</div>
+            </div>
+            <div class="card-stat">
+                <div class="count" id="wars-won">0</div>
+                <div class="label">Wars Won</div>
+            </div>
+            <div class="card-stat">
+                <div class="count" id="wars-lost">0</div>
+                <div class="label">Wars Lost</div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/game.js"></script>
+</body>
+</html>

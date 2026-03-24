@@ -1,0 +1,168 @@
+/* War uses shared styles from ../blackjack/css/style.css */
+/* This file contains War-specific overrides */
+
+body {
+    min-height: 100vh;
+}
+
+.war-container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 1rem;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    background: var(--bg-card);
+    border-radius: 10px;
+    margin-bottom: 1rem;
+}
+
+h1 {
+    font-size: 2rem;
+    color: var(--accent-gold);
+    text-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
+}
+
+.btn-lg {
+    padding: 1rem 2rem;
+    font-size: 1.2rem;
+}
+
+.player-area {
+    background: var(--bg-card);
+    border-radius: 10px;
+    padding: 1.5rem;
+    margin-bottom: 1rem;
+    text-align: center;
+}
+
+.player-area h2 {
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+    color: var(--text-muted);
+}
+
+.card-count {
+    font-size: 1.5rem;
+    color: var(--accent-gold);
+    margin-top: 0.5rem;
+}
+
+.battle-area {
+    background: var(--bg-darker);
+    border-radius: 10px;
+    padding: 2rem;
+    margin-bottom: 1rem;
+    min-height: 200px;
+}
+
+.battle-cards {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+    margin-bottom: 1.5rem;
+}
+
+.battle-slot {
+    width: 80px;
+    height: 112px;
+    border: 2px dashed var(--text-muted);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-muted);
+    position: relative;
+}
+
+.battle-slot .card {
+    position: absolute;
+}
+
+.battle-result {
+    text-align: center;
+    font-size: 1.5rem;
+    font-weight: bold;
+    min-height: 40px;
+}
+
+.battle-result.win {
+    color: var(--accent-green);
+}
+
+.battle-result.lose {
+    color: var(--accent-red);
+}
+
+.battle-result.tie {
+    color: var(--accent-gold);
+}
+
+.war-pile {
+    text-align: center;
+    margin-top: 1rem;
+    padding: 1rem;
+    background: rgba(255, 215, 0, 0.1);
+    border-radius: 8px;
+    border: 2px solid var(--accent-gold);
+}
+
+.war-pile span {
+    color: var(--accent-gold);
+    font-weight: bold;
+}
+
+.vs-text {
+    font-size: 2rem;
+    font-weight: bold;
+    color: var(--accent-red);
+}
+
+.controls {
+    text-align: center;
+    margin-top: 1rem;
+}
+
+.cards-remaining {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 1rem;
+    padding: 1rem;
+    background: var(--bg-card);
+    border-radius: 10px;
+}
+
+.card-stat {
+    text-align: center;
+}
+
+.card-stat .count {
+    font-size: 2rem;
+    font-weight: bold;
+    color: var(--accent-green);
+}
+
+.card-stat .label {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+}
+
+@media (max-width: 600px) {
+    .battle-cards {
+        gap: 1rem;
+    }
+    
+    .battle-slot {
+        width: 65px;
+        height: 91px;
+    }
+    
+    h1 {
+        font-size: 1.5rem;
+    }
+}
