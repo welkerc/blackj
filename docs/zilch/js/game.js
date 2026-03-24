@@ -1,8 +1,13 @@
 const WINNING_SCORE = 10000;
 const STORAGE_KEY = 'zilch_stats';
 
-const DICE_FACES = [
-    '⚀', '⚁', '⚂', '⚃', '⚄', '⚅'
+const DICE_IMAGES = [
+    'assets/dice-six-faces-one.png',
+    'assets/dice-six-faces-two.png',
+    'assets/dice-six-faces-three.png',
+    'assets/dice-six-faces-four.png',
+    'assets/dice-six-faces-five.png',
+    'assets/dice-six-faces-six.png'
 ];
 
 let gameState = {
@@ -231,7 +236,7 @@ function renderDice() {
         if (!isFrozen && !isSelectable) classes += ' non-scoring';
         if (isSelected) classes += ' selected';
         
-        return `<div class="${classes}" data-index="${isFrozen ? -1 : diceIndex}" data-value="${value}">${DICE_FACES[value - 1]}</div>`;
+        return `<div class="${classes}" data-index="${isFrozen ? -1 : diceIndex}" data-value="${value}"><img src="${DICE_IMAGES[value - 1]}" alt="Dice ${value}"></div>`;
     }).join('');
     
     document.querySelectorAll('.die:not(.frozen):not(.non-scoring)').forEach(die => {
