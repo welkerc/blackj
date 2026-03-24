@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Card Games</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="landing-container">
+        <header>
+            <h1>Card Games</h1>
+            <p class="subtitle">A collection of browser-based card games</p>
+            <p class="built-with">Built with <a href="https://opencode.ai" target="_blank">OpenCode</a></p>
+        </header>
+
+        <div class="games-grid">
+            <a href="blackjack/" class="game-card">
+                <div class="game-icon">🃏</div>
+                <h2>Blackjack</h2>
+                <p>Classic casino card game with betting and strategy</p>
+                <div class="game-features">
+                    <span>Hit / Stand / Double</span>
+                    <span>Split</span>
+                    <span>$1K Bankroll</span>
+                </div>
+                <span class="play-btn">Play Now</span>
+            </a>
+
+            <a href="war/" class="game-card">
+                <div class="game-icon">⚔️</div>
+                <h2>War</h2>
+                <p>A simple card game of luck vs the dealer</p>
+                <div class="game-features">
+                    <span>War Mechanic</span>
+                    <span>Multiple Wars</span>
+                    <span>Stats Tracking</span>
+                </div>
+                <span class="play-btn">Play Now</span>
+            </a>
+
+            <a href="cleardeck/" class="game-card">
+                <div class="game-icon">🚀</div>
+                <h2>Clear the Deck</h2>
+                <p>Race to play all your cards before opponents</p>
+                <div class="game-features">
+                    <span>Solo or vs AI</span>
+                    <span>Wild Tens</span>
+                    <span>Multi-round Scoring</span>
+                </div>
+                <span class="play-btn">Play Now</span>
+            </a>
+        </div>
+
+        <footer>
+            <p>Choose a game above to start playing</p>
+        </footer>
+    </div>
+
+    <style>
+        :root {
+            --bg-dark: #1a1a2e;
+            --bg-darker: #16213e;
+            --bg-card: #0f3460;
+            --accent-green: #00ff88;
+            --accent-red: #ff4757;
+            --accent-gold: #ffd700;
+            --accent-purple: #9b59b6;
+            --text-light: #eaeaea;
+            --text-muted: #8b8b8b;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, var(--bg-dark) 0%, var(--bg-darker) 100%);
+            min-height: 100vh;
+            color: var(--text-light);
+        }
+
+        .landing-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 2rem;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        header {
+            text-align: center;
+            padding: 2rem 0;
+        }
+
+        h1 {
+            font-size: 3rem;
+            color: var(--accent-gold);
+            text-shadow: 0 0 20px rgba(255, 215, 0, 0.3);
+            margin-bottom: 0.5rem;
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            color: var(--text-muted);
+            margin-bottom: 0.5rem;
+        }
+
+        .built-with {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+
+        .built-with a {
+            color: var(--accent-green);
+            text-decoration: none;
+        }
+
+        .built-with a:hover {
+            text-decoration: underline;
+        }
+
+        .games-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            flex: 1;
+            align-content: center;
+            padding: 1rem 0;
+        }
+
+        .game-card {
+            background: var(--bg-card);
+            border-radius: 15px;
+            padding: 2rem;
+            text-align: center;
+            text-decoration: none;
+            color: var(--text-light);
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .game-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--accent-gold);
+            box-shadow: 0 10px 40px rgba(255, 215, 0, 0.2);
+        }
+
+        .game-icon {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+        }
+
+        .game-card h2 {
+            color: var(--accent-gold);
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .game-card p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            margin-bottom: 1rem;
+            flex: 1;
+        }
+
+        .game-features {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .game-features span {
+            background: var(--bg-darker);
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            color: var(--text-light);
+        }
+
+        .play-btn {
+            background: var(--accent-green);
+            color: #1a1a1a;
+            padding: 0.75rem 2rem;
+            border-radius: 8px;
+            font-weight: bold;
+            transition: all 0.2s ease;
+        }
+
+        .game-card:hover .play-btn {
+            background: var(--accent-gold);
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
+        }
+
+        footer {
+            text-align: center;
+            padding: 2rem 0;
+            color: var(--text-muted);
+        }
+
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 2rem;
+            }
+
+            .games-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .game-card {
+                padding: 1.5rem;
+            }
+
+            .game-icon {
+                font-size: 3rem;
+            }
+        }
+    </style>
+</body>
+</html>
