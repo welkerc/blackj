@@ -16,6 +16,113 @@
             padding: 1rem;
         }
         
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem;
+            background: var(--bg-card);
+            border-radius: 10px;
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        
+        header h1 {
+            color: var(--accent-gold);
+        }
+        
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .back-link {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.9rem;
+        }
+        
+        .back-link:hover {
+            color: var(--accent-green);
+        }
+        
+        .btn-sm {
+            padding: 0.5rem 1rem;
+            font-size: 0.9rem;
+        }
+        
+        .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            padding: 1rem;
+        }
+        
+        .modal-content {
+            background: var(--bg-card);
+            padding: 2rem;
+            border-radius: 15px;
+            max-width: 600px;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+        
+        .modal-content h2 {
+            color: var(--accent-gold);
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+        
+        .rules-text {
+            text-align: left;
+        }
+        
+        .rules-text p {
+            margin-bottom: 1rem;
+            color: var(--text-light);
+        }
+        
+        .rules-text h4 {
+            color: var(--accent-gold);
+            margin-top: 1.5rem;
+            margin-bottom: 0.75rem;
+        }
+        
+        .rules-text ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        
+        .rules-text li {
+            padding: 0.4rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+            color: var(--text-muted);
+        }
+        
+        .rules-text li::before {
+            content: "•";
+            color: var(--accent-green);
+            position: absolute;
+            left: 0;
+        }
+        
         .player-area {
             background: var(--bg-card);
             border-radius: 10px;
@@ -166,9 +273,15 @@
 <body>
     <div class="war-container">
         <header>
-            <h1>War</h1>
-            <div class="bankroll">
-                <span>Rounds Won: </span><span id="rounds-won">0</span>
+            <div class="header-left">
+                <h1>War</h1>
+                <a href="../" class="back-link">← Back to Games</a>
+            </div>
+            <div class="header-right">
+                <button id="rules-btn" class="btn btn-secondary btn-sm">📖 Rules</button>
+                <div class="bankroll">
+                    <span>Rounds Won: </span><span id="rounds-won">0</span>
+                </div>
             </div>
         </header>
 
@@ -214,6 +327,44 @@
                 <div class="count" id="wars-lost">0</div>
                 <div class="label">Wars Lost</div>
             </div>
+        </div>
+    </div>
+
+    <div id="rules-modal" class="modal hidden">
+        <div class="modal-content">
+            <h2>⚔️ War Rules</h2>
+            <div class="rules-text">
+                <p><strong>Objective:</strong> Win all 52 cards by having the higher card.</p>
+                
+                <h4>How to Play</h4>
+                <ul>
+                    <li>Each player flips the top card of their deck</li>
+                    <li>The player with the higher card takes both cards</li>
+                    <li>Cards are added to the bottom of the winner's deck</li>
+                </ul>
+                
+                <h4>War</h4>
+                <ul>
+                    <li>When both players flip cards of the same value, it's War!</li>
+                    <li>Each player puts 3 cards face-down + 1 card face-up</li>
+                    <li>The player with the higher face-up card wins all cards</li>
+                    <li>If there's another tie, the war continues!</li>
+                </ul>
+                
+                <h4>Game End</h4>
+                <ul>
+                    <li>One player has all 52 cards</li>
+                    <li>Or a player runs out of cards during war</li>
+                </ul>
+                
+                <h4>Tips</h4>
+                <ul>
+                    <li>Wars can accumulate quickly</li>
+                    <li>Keep track of the pile during long wars</li>
+                    <li>Patience is key - luck plays a big role!</li>
+                </ul>
+            </div>
+            <button id="close-rules" class="btn btn-primary">Got It!</button>
         </div>
     </div>
 

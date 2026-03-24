@@ -61,6 +61,13 @@ function setupEventListeners() {
     document.getElementById('end-game-btn').addEventListener('click', endGame);
     document.getElementById('next-round-btn').addEventListener('click', nextRound);
     document.getElementById('new-game-btn').addEventListener('click', newGame);
+    
+    document.getElementById('rules-btn').addEventListener('click', () => {
+        document.getElementById('rules-modal').classList.remove('hidden');
+    });
+    document.getElementById('close-rules').addEventListener('click', () => {
+        document.getElementById('rules-modal').classList.add('hidden');
+    });
 }
 
 function startGame(mode, numAI = 0) {

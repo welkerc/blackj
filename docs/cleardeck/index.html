@@ -9,10 +9,16 @@
 <body>
     <div class="game-container">
         <header>
-            <h1>Clear the Deck</h1>
-            <div class="header-stats">
-                <span>Round: <span id="round">1</span></span>
-                <span>Your Score: <span id="player-score">0</span></span>
+            <div class="header-left">
+                <h1>Clear the Deck</h1>
+                <a href="../" class="back-link">← Back to Games</a>
+            </div>
+            <div class="header-right">
+                <button id="rules-btn" class="btn btn-secondary btn-sm">📖 Rules</button>
+                <div class="header-stats">
+                    <span>Round: <span id="round">1</span></span>
+                    <span>Your Score: <span id="player-score">0</span></span>
+                </div>
             </div>
         </header>
 
@@ -67,6 +73,56 @@
                     <button id="take-pile-btn" class="btn btn-secondary hidden">Take Pile</button>
                 </div>
                 <button id="end-game-btn" class="btn btn-secondary mt-2">End Game / Show Scores</button>
+            </div>
+        </div>
+
+        <div id="rules-modal" class="modal hidden">
+            <div class="modal-content">
+                <h2>🚀 Clear the Deck Rules</h2>
+                <div class="rules-text">
+                    <p><strong>Objective:</strong> Be the first to play all 20 cards.</p>
+                    <p><em>Rules adapted from <a href="https://clear-the-deck.com/" target="_blank" style="color: var(--accent-green);">clear-the-deck.com</a></em></p>
+                    
+                    <h4>Setup</h4>
+                    <ul>
+                        <li>Each player gets 20 cards:
+                            <ul>
+                                <li>4 face-down cards</li>
+                                <li>4 face-up cards (on top of face-down)</li>
+                                <li>12 cards in hand</li>
+                            </ul>
+                        </li>
+                        <li>One card is placed face-up to start the pile</li>
+                    </ul>
+                    
+                    <h4>Card Values</h4>
+                    <ul>
+                        <li>Ace = 1 (low), 2-10 = face value, J = 11, Q = 12, K = 13 (high)</li>
+                    </ul>
+                    
+                    <h4>Playing Cards</h4>
+                    <ul>
+                        <li>You must play cards of equal or LESSER value than the pile</li>
+                        <li>You can play multiple cards of the same value at once</li>
+                        <li>Face-down cards can only be played once their face-up cards are gone</li>
+                    </ul>
+                    
+                    <h4>Special Moves</h4>
+                    <ul>
+                        <li><strong>Clear the Deck:</strong> Play 4+ cards of the same value to clear the pile + take another turn</li>
+                        <li><strong>Higher Value:</strong> Playing higher value forces you to take the pile + take another turn</li>
+                        <li><strong>Wild Tens:</strong> Tens can clear the deck at any time, but count as 25 points if held at the end</li>
+                    </ul>
+                    
+                    <h4>Scoring</h4>
+                    <ul>
+                        <li>First player out = 0 points</li>
+                        <li>Other players score points for remaining cards</li>
+                        <li>Numbered cards = face value, J=11, Q=12, K=13, Tens=25</li>
+                        <li>Lowest score wins!</li>
+                    </ul>
+                </div>
+                <button id="close-rules" class="btn btn-primary">Got It!</button>
             </div>
         </div>
 

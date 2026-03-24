@@ -83,6 +83,13 @@ function startNewGame() {
 function setupEventListeners() {
     document.getElementById('play-btn').addEventListener('click', playRound);
     document.getElementById('restart-btn').addEventListener('click', startNewGame);
+    
+    document.getElementById('rules-btn').addEventListener('click', () => {
+        document.getElementById('rules-modal').classList.remove('hidden');
+    });
+    document.getElementById('close-rules').addEventListener('click', () => {
+        document.getElementById('rules-modal').classList.add('hidden');
+    });
 }
 
 function playRound() {

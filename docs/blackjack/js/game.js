@@ -94,6 +94,13 @@ function setupEventListeners() {
     document.getElementById('double-btn').addEventListener('click', doubleDown);
     document.getElementById('split-btn').addEventListener('click', split);
     document.getElementById('new-game-btn').addEventListener('click', resetToBetting);
+
+    document.getElementById('rules-btn').addEventListener('click', () => {
+        document.getElementById('rules-modal').classList.remove('hidden');
+    });
+    document.getElementById('close-rules').addEventListener('click', () => {
+        document.getElementById('rules-modal').classList.add('hidden');
+    });
 }
 
 function addToBet(amount) {

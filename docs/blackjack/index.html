@@ -9,9 +9,15 @@
 <body>
     <div class="game-container">
         <header>
-            <h1>Blackjack</h1>
-            <div class="bankroll">
-                <span>Bankroll: $</span><span id="bankroll">1000</span>
+            <div class="header-left">
+                <h1>Blackjack</h1>
+                <a href="../" class="back-link">← Back to Games</a>
+            </div>
+            <div class="header-right">
+                <button id="rules-btn" class="btn btn-secondary btn-sm">📖 Rules</button>
+                <div class="bankroll">
+                    <span>Bankroll: $</span><span id="bankroll">1000</span>
+                </div>
             </div>
         </header>
 
@@ -71,6 +77,45 @@
 
         <div class="result-area hidden" id="result-area">
             <button id="new-game-btn" class="btn btn-primary">New Hand</button>
+        </div>
+    </div>
+
+    <div id="rules-modal" class="modal hidden">
+        <div class="modal-content">
+            <h2>🃏 Blackjack Rules</h2>
+            <div class="rules-text">
+                <p><strong>Objective:</strong> Get as close to 21 as possible without going over.</p>
+                
+                <h4>Card Values</h4>
+                <ul>
+                    <li>Number cards = face value</li>
+                    <li>Face cards (J, Q, K) = 10</li>
+                    <li>Ace = 1 or 11 (you choose)</li>
+                </ul>
+                
+                <h4>Actions</h4>
+                <ul>
+                    <li><strong>Hit:</strong> Draw another card</li>
+                    <li><strong>Stand:</strong> Keep your current hand</li>
+                    <li><strong>Double Down:</strong> Double your bet, get one more card, then stand</li>
+                    <li><strong>Split:</strong> Split pairs into two separate hands</li>
+                </ul>
+                
+                <h4>Game Rules</h4>
+                <ul>
+                    <li><strong>Blackjack:</strong> Ace + 10/J/Q/K on first two cards = 3:2 payout</li>
+                    <li><strong>Dealer:</strong> Must hit on 16 or less, stand on 17+</li>
+                    <li><strong>Bust:</strong> Going over 21 = automatic loss</li>
+                </ul>
+                
+                <h4>Betting</h4>
+                <ul>
+                    <li>Min bet: $1 | Max bet: $100</li>
+                    <li>Starting bankroll: $1,000</li>
+                    <li>Blackjack pays 3:2</li>
+                </ul>
+            </div>
+            <button id="close-rules" class="btn btn-primary">Got It!</button>
         </div>
     </div>
 
