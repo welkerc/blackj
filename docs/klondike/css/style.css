@@ -114,6 +114,19 @@ body {
 .tableau-column .card {
     position: absolute;
     left: 0;
+    transition: transform 0.15s ease, box-shadow 0.15s ease, z-index 0s;
+}
+
+.tableau-column .card.face-down {
+    z-index: 1;
+}
+
+.tableau-column .card.face-up {
+    z-index: 2;
+}
+
+.tableau-column .card.face-up:hover {
+    z-index: 100;
 }
 
 .card {

@@ -208,7 +208,8 @@ function handleCardClick(card, source, sourceIndex, cardIndex) {
     if (!card.faceUp) return;
 
     if (gameState.selectedCard) {
-        if (gameState.selectedCard.card === card && gameState.selectedCard.source === source) {
+        if (gameState.selectedCard.card === card && gameState.selectedCard.source === source &&
+            gameState.selectedCard.cardIndex === cardIndex) {
             clearSelection();
             return;
         }
@@ -223,7 +224,7 @@ function handleCardClick(card, source, sourceIndex, cardIndex) {
 
     if (card.faceUp) {
         gameState.selectedCard = { card, source, sourceIndex, cardIndex };
-        highlightSelectedCard(card, source, sourceIndex);
+        highlightSelectedCard(source, sourceIndex, cardIndex);
     }
 }
 
@@ -232,13 +233,17 @@ function tryMoveCard(targetCard, destSource, destSourceIndex, destCardIndex) {
 
     if (source === 'tableau') {
         const column = gameState.tableau[sourceIndex];
-        if (cardIndex !== column.length - 1) return false;
+        if (cardIndex > column.length - 1) return false;
     } else if (source === 'waste') {
         const wasteTop = gameState.waste[gameState.waste.length - 1];
         if (card !== wasteTop) return false;
     }
 
     if (destSource === 'foundation') {
+        if (source === 'tableau') {
+            const column = gameState.tableau[sourceIndex];
+            if (cardIndex !== column.length - 1) return false;
+        }
         const cardToMove = source === 'waste' ? gameState.waste[gameState.waste.length - 1] :
                           gameState.tableau[sourceIndex][cardIndex];
         if (cardToMove !== card) return false;
@@ -256,8 +261,8 @@ function tryMoveCard(targetCard, destSource, destSourceIndex, destCardIndex) {
     } else if (destSource === 'tableau') {
         if (canMoveToTableau(card, destSourceIndex)) {
             saveState();
-            removeCardFromSource(source, sourceIndex, cardIndex);
-            gameState.tableau[destSourceIndex].push(card);
+            const cardsToMove = removeCardFromSource(source, sourceIndex, cardIndex);
+            gameState.tableau[destSourceIndex].push(...cardsToMove);
             gameState.moves++;
             flipTopCard(sourceIndex);
             updateUI();
@@ -270,10 +275,12 @@ function tryMoveCard(targetCard, destSource, destSourceIndex, destCardIndex) {
 
 function removeCardFromSource(source, sourceIndex, cardIndex) {
     if (source === 'waste') {
-        gameState.waste.pop();
+        return [gameState.waste.pop()];
     } else if (source === 'tableau') {
-        gameState.tableau[sourceIndex].splice(cardIndex, 1);
+        const column = gameState.tableau[sourceIndex];
+        return column.splice(cardIndex);
     }
+    return [];
 }
 
 function flipTopCard(tableauIndex) {
@@ -288,7 +295,7 @@ function clearSelection() {
     document.querySelectorAll('.card.selected').forEach(el => el.classList.remove('selected'));
 }
 
-function highlightSelectedCard(card, source, sourceIndex) {
+function highlightSelectedCard(source, sourceIndex, cardIndex) {
     document.querySelectorAll('.card.selected').forEach(el => el.classList.remove('selected'));
 
     if (source === 'waste') {
@@ -299,8 +306,8 @@ function highlightSelectedCard(card, source, sourceIndex) {
     } else if (source === 'tableau') {
         const column = document.querySelector(`[data-col="${sourceIndex}"]`);
         const cards = column.querySelectorAll('.card');
-        if (cards.length > 0) {
-            cards[cards.length - 1].classList.add('selected');
+        for (let i = cardIndex; i < cards.length; i++) {
+            cards[i].classList.add('selected');
         }
     }
 }
@@ -364,35 +371,42 @@ function findAllValidMoves() {
         const column = gameState.tableau[col];
         if (column.length === 0) continue;
         
-        const card = column[column.length - 1];
-        if (!card.faceUp) continue;
+        for (let cardIdx = 0; cardIdx < column.length; cardIdx++) {
+            const card = column[cardIdx];
+            if (!card.faceUp) continue;
+            const isTopCard = cardIdx === column.length - 1;
 
-        for (let i = 0; i < 4; i++) {
-            if (canMoveToFoundation(card, i)) {
-                moves.push({
-                    type: 'foundation',
-                    source: 'tableau',
-                    sourceIndex: col,
-                    card: card,
-                    destType: 'foundation',
-                    destIndex: i,
-                    priority: 2
-                });
+            if (isTopCard) {
+                for (let i = 0; i < 4; i++) {
+                    if (canMoveToFoundation(card, i)) {
+                        moves.push({
+                            type: 'foundation',
+                            source: 'tableau',
+                            sourceIndex: col,
+                            cardIndex: cardIdx,
+                            card: card,
+                            destType: 'foundation',
+                            destIndex: i,
+                            priority: 2
+                        });
+                    }
+                }
             }
-        }
 
-        for (let destCol = 0; destCol < 7; destCol++) {
-            if (col === destCol) continue;
-            if (canMoveToTableau(card, destCol)) {
-                moves.push({
-                    type: 'tableau',
-                    source: 'tableau',
-                    sourceIndex: col,
-                    card: card,
-                    destType: 'tableau',
-                    destIndex: destCol,
-                    priority: 1
-                });
+            for (let destCol = 0; destCol < 7; destCol++) {
+                if (col === destCol) continue;
+                if (canMoveToTableau(card, destCol)) {
+                    moves.push({
+                        type: 'tableau',
+                        source: 'tableau',
+                        sourceIndex: col,
+                        cardIndex: cardIdx,
+                        card: card,
+                        destType: 'tableau',
+                        destIndex: destCol,
+                        priority: 1
+                    });
+                }
             }
         }
     }
@@ -412,7 +426,7 @@ function showHint() {
     moves.sort((a, b) => b.priority - a.priority);
     hintMove = moves[0];
 
-    const { source, sourceIndex, card, destType, destIndex } = hintMove;
+    const { source, sourceIndex, cardIndex, destType, destIndex } = hintMove;
 
     if (source === 'waste') {
         const wasteCards = document.querySelectorAll('#waste .card');
@@ -422,8 +436,8 @@ function showHint() {
     } else if (source === 'tableau') {
         const column = document.querySelector(`[data-col="${sourceIndex}"]`);
         const cards = column.querySelectorAll('.card');
-        if (cards.length > 0) {
-            cards[cards.length - 1].classList.add('hint');
+        for (let i = cardIndex; i < cards.length; i++) {
+            cards[i].classList.add('hint');
         }
     }
 
@@ -439,7 +453,7 @@ function showHint() {
         }
     }
 
-    showMessage('Hint: Try moving the highlighted card', 2000);
+    showMessage('Hint: Try moving the highlighted card(s)', 2000);
 }
 
 function clearHint() {
