@@ -62,6 +62,18 @@
                 </div>
                 <span class="play-btn">Play Now</span>
             </a>
+
+            <a href="klondike/" class="game-card">
+                <div class="game-icon">🀄</div>
+                <h2>Klondike</h2>
+                <p>Classic single-player solitaire - patience and strategy</p>
+                <div class="game-features">
+                    <span>Draw 1 or 3</span>
+                    <span>Auto-finish</span>
+                    <span>Move Tracking</span>
+                </div>
+                <span class="play-btn">Play Now</span>
+            </a>
         </div>
 
         <section class="rules-section">
@@ -138,6 +150,25 @@
                     </ul>
                     <p><strong>Scoring:</strong> 1=100, 5=50, Three of a kind=number×100, Three 1s=1000, Three pairs=1000, Straight=1000</p>
                     <p><strong>Tip:</strong> Know when to bank - zilching hurts more with higher turn scores!</p>
+                </div>
+
+                <button class="rules-header" onclick="toggleRules('klondike-rules')">
+                    <span>🀄 Klondike Rules</span>
+                    <span class="arrow">▼</span>
+                </button>
+                <div id="klondike-rules" class="rules-content hidden">
+                    <p><strong>Objective:</strong> Move all 52 cards to the four foundation piles, built up by suit from Ace to King.</p>
+                    <ul>
+                        <li><strong>Setup:</strong> 7 tableau columns. Column 1 has 1 card, column 2 has 2 cards, etc. Top card is face-up.</li>
+                        <li><strong>Tableau:</strong> Build down in alternating colors (red on black, black on red)</li>
+                        <li><strong>Foundations:</strong> Build up by suit (Ace, 2, 3... King)</li>
+                        <li><strong>Stock:</strong> Click to draw cards to the waste pile</li>
+                        <li><strong>Empty columns:</strong> Only Kings can be placed</li>
+                        <li><strong>Draw 1:</strong> Easier mode - draw one card at a time</li>
+                        <li><strong>Draw 3:</strong> Harder mode - draw three cards, more options but less predictable</li>
+                    </ul>
+                    <p><strong>How to Play:</strong> Click a face-up card to select it, then click where you want to move it. Double-click to auto-move to foundation.</p>
+                    <p><strong>Tip:</strong> Flip face-down cards as quickly as possible to open up more moves!</p>
                 </div>
             </div>
         </section>

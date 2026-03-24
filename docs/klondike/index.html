@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Klondike Solitaire</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <div class="game-container">
+        <header>
+            <div class="header-left">
+                <h1>Klondike Solitaire</h1>
+                <a href="../" class="back-btn">← Back to Games</a>
+            </div>
+            <div class="header-right">
+                <button id="rules-btn" class="btn btn-secondary btn-sm">📖 Rules</button>
+                <button id="new-game-btn" class="btn btn-primary btn-sm">New Game</button>
+            </div>
+        </header>
+
+        <div id="mode-select" class="mode-select">
+            <h2>Select Draw Mode</h2>
+            <div class="mode-buttons">
+                <button class="btn btn-primary btn-lg" id="draw1-btn">Draw 1</button>
+                <button class="btn btn-secondary btn-lg" id="draw3-btn">Draw 3</button>
+            </div>
+            <p class="mode-hint">Draw 1 is easier, Draw 3 is more challenging</p>
+        </div>
+
+        <div id="game-area" class="hidden">
+            <div class="game-top">
+                <div class="stock-waste">
+                    <div id="stock" class="pile stock empty">
+                        <span class="pile-label">Stock</span>
+                    </div>
+                    <div id="waste" class="pile waste">
+                        <span class="pile-label">Waste</span>
+                    </div>
+                </div>
+                <div id="foundations" class="foundations">
+                    <div class="pile foundation empty" data-foundation="0" data-suit="♣">
+                        <span class="pile-label">♣</span>
+                    </div>
+                    <div class="pile foundation empty" data-foundation="1" data-suit="♦">
+                        <span class="pile-label">♦</span>
+                    </div>
+                    <div class="pile foundation empty" data-foundation="2" data-suit="♥">
+                        <span class="pile-label">♥</span>
+                    </div>
+                    <div class="pile foundation empty" data-foundation="3" data-suit="♠">
+                        <span class="pile-label">♠</span>
+                    </div>
+                </div>
+            </div>
+            <div id="tableau" class="tableau">
+                <div class="tableau-column" data-col="0"></div>
+                <div class="tableau-column" data-col="1"></div>
+                <div class="tableau-column" data-col="2"></div>
+                <div class="tableau-column" data-col="3"></div>
+                <div class="tableau-column" data-col="4"></div>
+                <div class="tableau-column" data-col="5"></div>
+                <div class="tableau-column" data-col="6"></div>
+            </div>
+            <div id="message" class="message"></div>
+        </div>
+
+        <div id="win-modal" class="modal hidden">
+            <div class="modal-content">
+                <h2>🎉 You Win!</h2>
+                <p id="win-stats"></p>
+                <button id="play-again-btn" class="btn btn-primary">Play Again</button>
+            </div>
+        </div>
+
+        <div id="rules-modal" class="modal hidden">
+            <div class="modal-content">
+                <h2>📖 Klondike Rules</h2>
+                <div class="rules-text">
+                    <h3>Objective</h3>
+                    <p>Move all 52 cards to the four foundation piles, built up by suit from Ace to King.</p>
+                    
+                    <h3>Setup</h3>
+                    <p>7 tableau columns. Column 1 has 1 card, column 2 has 2 cards, etc. Top card of each column is face-up.</p>
+                    
+                    <h3>Rules</h3>
+                    <ul>
+                        <li><strong>Tableau:</strong> Build down in alternating colors (red on black, black on red)</li>
+                        <li><strong>Foundations:</strong> Build up by suit (Ace, 2, 3... King)</li>
+                        <li><strong>Stock:</strong> Click to draw cards to waste pile</li>
+                        <li><strong>Empty columns:</strong> Only Kings can be placed</li>
+                        <li><strong>Draw 1:</strong> Draw one card at a time (easier)</li>
+                        <li><strong>Draw 3:</strong> Draw three cards at a time (harder, but more options)</li>
+                    </ul>
+                    
+                    <h3>How to Play</h3>
+                    <p>Click a face-up card to select it, then click where you want to move it. Double-click to auto-move to foundation if possible.</p>
+                </div>
+                <button id="close-rules" class="btn btn-primary">Got It!</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/game.js"></script>
+</body>
+</html>
