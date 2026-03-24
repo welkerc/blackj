@@ -15,6 +15,9 @@ let gameState = {
     gameStarted: false
 };
 
+let history = [];
+let hintMove = null;
+
 function init() {
     setupEventListeners();
     loadStats();
@@ -34,6 +37,8 @@ function setupEventListeners() {
         document.getElementById('win-modal').classList.add('hidden');
         showModeSelect();
     });
+    document.getElementById('undo-btn').addEventListener('click', undoMove);
+    document.getElementById('hint-btn').addEventListener('click', showHint);
 
     document.getElementById('rules-modal').addEventListener('click', (e) => {
         if (e.target === document.getElementById('rules-modal')) {
@@ -68,7 +73,40 @@ function shuffleDeck(deck) {
     return shuffled;
 }
 
+function deepCopy(obj) {
+    return JSON.parse(JSON.stringify(obj));
+}
+
+function saveState() {
+    history.push({
+        stock: deepCopy(gameState.stock),
+        waste: deepCopy(gameState.waste),
+        foundations: deepCopy(gameState.foundations),
+        tableau: deepCopy(gameState.tableau),
+        moves: gameState.moves
+    });
+    if (history.length > 50) {
+        history.shift();
+    }
+}
+
+function undoMove() {
+    if (history.length === 0) return;
+    
+    const prevState = history.pop();
+    gameState.stock = prevState.stock;
+    gameState.waste = prevState.waste;
+    gameState.foundations = prevState.foundations;
+    gameState.tableau = prevState.tableau;
+    gameState.moves = prevState.moves;
+    gameState.selectedCard = null;
+    
+    clearHint();
+    updateUI();
+}
+
 function startGame(drawMode) {
+    history = [];
     gameState = {
         stock: [],
         waste: [],
@@ -101,6 +139,9 @@ function startGame(drawMode) {
 }
 
 function drawFromStock() {
+    saveState();
+    clearHint();
+
     if (gameState.stock.length === 0) {
         if (gameState.waste.length > 0) {
             gameState.stock = gameState.waste.reverse().map(c => ({ ...c, faceUp: false }));
@@ -163,6 +204,7 @@ function canMoveToTableau(card, columnIndex) {
 }
 
 function handleCardClick(card, source, sourceIndex, cardIndex) {
+    clearHint();
     if (!card.faceUp) return;
 
     if (gameState.selectedCard) {
@@ -202,6 +244,7 @@ function tryMoveCard(targetCard, destSource, destSourceIndex, destCardIndex) {
         if (cardToMove !== card) return false;
 
         if (canMoveToFoundation(card, destSourceIndex)) {
+            saveState();
             removeCardFromSource(source, sourceIndex, cardIndex);
             gameState.foundations[destSourceIndex].push(card);
             gameState.moves++;
@@ -212,6 +255,7 @@ function tryMoveCard(targetCard, destSource, destSourceIndex, destCardIndex) {
         }
     } else if (destSource === 'tableau') {
         if (canMoveToTableau(card, destSourceIndex)) {
+            saveState();
             removeCardFromSource(source, sourceIndex, cardIndex);
             gameState.tableau[destSourceIndex].push(card);
             gameState.moves++;
@@ -272,6 +316,7 @@ function tryAutoMoveToFoundation(card, source, sourceIndex, cardIndex) {
 
     for (let i = 0; i < 4; i++) {
         if (canMoveToFoundation(card, i)) {
+            saveState();
             removeCardFromSource(source, sourceIndex, cardIndex);
             gameState.foundations[i].push(card);
             gameState.moves++;
@@ -282,6 +327,136 @@ function tryAutoMoveToFoundation(card, source, sourceIndex, cardIndex) {
         }
     }
     return false;
+}
+
+function findAllValidMoves() {
+    const moves = [];
+
+    if (gameState.waste.length > 0) {
+        const card = gameState.waste[gameState.waste.length - 1];
+        for (let i = 0; i < 4; i++) {
+            if (canMoveToFoundation(card, i)) {
+                moves.push({
+                    type: 'foundation',
+                    source: 'waste',
+                    card: card,
+                    destType: 'foundation',
+                    destIndex: i,
+                    priority: 2
+                });
+            }
+        }
+        for (let i = 0; i < 7; i++) {
+            if (canMoveToTableau(card, i)) {
+                moves.push({
+                    type: 'tableau',
+                    source: 'waste',
+                    card: card,
+                    destType: 'tableau',
+                    destIndex: i,
+                    priority: 1
+                });
+            }
+        }
+    }
+
+    for (let col = 0; col < 7; col++) {
+        const column = gameState.tableau[col];
+        if (column.length === 0) continue;
+        
+        const card = column[column.length - 1];
+        if (!card.faceUp) continue;
+
+        for (let i = 0; i < 4; i++) {
+            if (canMoveToFoundation(card, i)) {
+                moves.push({
+                    type: 'foundation',
+                    source: 'tableau',
+                    sourceIndex: col,
+                    card: card,
+                    destType: 'foundation',
+                    destIndex: i,
+                    priority: 2
+                });
+            }
+        }
+
+        for (let destCol = 0; destCol < 7; destCol++) {
+            if (col === destCol) continue;
+            if (canMoveToTableau(card, destCol)) {
+                moves.push({
+                    type: 'tableau',
+                    source: 'tableau',
+                    sourceIndex: col,
+                    card: card,
+                    destType: 'tableau',
+                    destIndex: destCol,
+                    priority: 1
+                });
+            }
+        }
+    }
+
+    return moves;
+}
+
+function showHint() {
+    clearHint();
+    const moves = findAllValidMoves();
+    
+    if (moves.length === 0) {
+        showMessage('No valid moves! Try drawing from stock.', 2000);
+        return;
+    }
+
+    moves.sort((a, b) => b.priority - a.priority);
+    hintMove = moves[0];
+
+    const { source, sourceIndex, card, destType, destIndex } = hintMove;
+
+    if (source === 'waste') {
+        const wasteCards = document.querySelectorAll('#waste .card');
+        if (wasteCards.length > 0) {
+            wasteCards[wasteCards.length - 1].classList.add('hint');
+        }
+    } else if (source === 'tableau') {
+        const column = document.querySelector(`[data-col="${sourceIndex}"]`);
+        const cards = column.querySelectorAll('.card');
+        if (cards.length > 0) {
+            cards[cards.length - 1].classList.add('hint');
+        }
+    }
+
+    if (destType === 'foundation') {
+        const foundations = document.querySelectorAll('.foundation');
+        if (foundations[destIndex]) {
+            foundations[destIndex].classList.add('hint-dest');
+        }
+    } else if (destType === 'tableau') {
+        const columns = document.querySelectorAll('.tableau-column');
+        if (columns[destIndex]) {
+            columns[destIndex].classList.add('hint-dest');
+        }
+    }
+
+    showMessage('Hint: Try moving the highlighted card', 2000);
+}
+
+function clearHint() {
+    hintMove = null;
+    document.querySelectorAll('.hint').forEach(el => el.classList.remove('hint'));
+    document.querySelectorAll('.hint-dest').forEach(el => el.classList.remove('hint-dest'));
+}
+
+function showMessage(text, duration) {
+    const messageEl = document.getElementById('message');
+    const originalContent = messageEl.innerHTML;
+    
+    messageEl.innerHTML = `<div class="temp-message">${text}</div>` + messageEl.innerHTML;
+    
+    setTimeout(() => {
+        messageEl.innerHTML = originalContent;
+    }, duration);
 }
 
 function createCardElement(card, source, sourceIndex, cardIndex) {
@@ -400,6 +575,9 @@ function updateMessage() {
 
     let cardsInFoundation = 0;
     gameState.foundations.forEach(f => cardsInFoundation += f.length);
+
+    const undoBtn = document.getElementById('undo-btn');
+    undoBtn.disabled = history.length === 0;
 
     messageEl.innerHTML = `
         <div class="stats-display">

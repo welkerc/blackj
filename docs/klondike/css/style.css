@@ -233,3 +233,45 @@ body {
     color: var(--accent-green);
     font-weight: bold;
 }
+
+.card.hint {
+    animation: hint-pulse 0.8s ease-in-out infinite;
+    box-shadow: 0 0 20px var(--accent-gold), 0 0 40px var(--accent-gold) !important;
+}
+
+@keyframes hint-pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+}
+
+.hint-dest {
+    border-color: var(--accent-gold) !important;
+    box-shadow: 0 0 20px var(--accent-gold);
+    animation: hint-pulse-border 0.8s ease-in-out infinite;
+}
+
+@keyframes hint-pulse-border {
+    0%, 100% { border-color: var(--accent-gold); }
+    50% { border-color: var(--accent-green); }
+}
+
+.temp-message {
+    background: var(--accent-gold);
+    color: #1a1a1a;
+    padding: 8px 16px;
+    border-radius: 8px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    display: inline-block;
+    animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+#undo-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
