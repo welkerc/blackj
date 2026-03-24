@@ -90,6 +90,11 @@ function setupEventListeners() {
     document.getElementById('close-rules').addEventListener('click', () => {
         document.getElementById('rules-modal').classList.add('hidden');
     });
+    document.getElementById('rules-modal').addEventListener('click', (e) => {
+        if (e.target.id === 'rules-modal') {
+            document.getElementById('rules-modal').classList.add('hidden');
+        }
+    });
 }
 
 function playRound() {
