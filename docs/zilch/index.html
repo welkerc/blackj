@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zilch - Dice Game</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="game-container">
+        <header>
+            <div class="header-left">
+                <h1>🎲 Zilch</h1>
+                <a href="../" class="back-btn">← Back to Games</a>
+            </div>
+            <div class="header-right">
+                <button id="rules-btn" class="btn btn-secondary btn-sm">📖 Rules</button>
+                <div class="score-display">
+                    <span>Total: </span><span id="total-score">0</span>
+                </div>
+            </div>
+        </header>
+
+        <div class="game-area">
+            <div class="dice-tray" id="dice-tray">
+                <div class="dice-placeholder">Click Roll to start!</div>
+            </div>
+
+            <div class="frozen-dice" id="frozen-dice">
+                <span class="frozen-label">Frozen:</span>
+                <div class="frozen-list" id="frozen-list"></div>
+                <span class="frozen-score" id="frozen-score">0 pts</span>
+            </div>
+
+            <div class="turn-info">
+                <div class="turn-score">
+                    <span>This Turn: </span>
+                    <span id="turn-score">0</span>
+                </div>
+                <div class="dice-left">
+                    <span>Dice Left: </span>
+                    <span id="dice-left">6</span>
+                </div>
+            </div>
+
+            <div class="message-area">
+                <p id="message">Roll the dice to begin!</p>
+            </div>
+
+            <div class="action-buttons">
+                <button id="roll-btn" class="btn btn-primary btn-lg">🎲 Roll Dice</button>
+                <button id="bank-btn" class="btn btn-gold btn-lg hidden" disabled>💰 Bank <span id="bank-amount">0</span> pts</button>
+                <button id="new-game-btn" class="btn btn-secondary hidden">New Game</button>
+            </div>
+        </div>
+
+        <div class="stats-bar">
+            <div class="stat">
+                <span class="stat-label">Turns:</span>
+                <span id="turns-played">0</span>
+            </div>
+            <div class="stat">
+                <span class="stat-label">Zilches:</span>
+                <span id="zilches">0</span>
+            </div>
+            <div class="stat">
+                <span class="stat-label">High Score:</span>
+                <span id="high-score">0</span>
+            </div>
+        </div>
+    </div>
+
+    <div id="rules-modal" class="modal hidden">
+        <div class="modal-content">
+            <h2>🎲 Zilch Rules</h2>
+            <div class="rules-text">
+                <p><strong>Objective:</strong> Be the first to reach 10,000 points!</p>
+                
+                <h4>How to Play</h4>
+                <ul>
+                    <li>Roll 6 dice</li>
+                    <li>Select scoring dice to "freeze"</li>
+                    <li>Bank your points or roll remaining dice</li>
+                    <li>If you roll no scoring dice = <strong>ZILCH!</strong> (lose all turn points)</li>
+                    <li>Score all 6 dice = roll all 6 again!</li>
+                </ul>
+                
+                <h4>Scoring</h4>
+                <ul>
+                    <li><strong>1</strong> = 100 points</li>
+                    <li><strong>5</strong> = 50 points</li>
+                    <li><strong>Three of a kind</strong> = Number × 100</li>
+                    <li><strong>Three 1s</strong> = 1000 points</li>
+                    <li><strong>Three pairs</strong> = 1000 points</li>
+                    <li><strong>Straight (1-2-3-4-5-6)</strong> = 1000 points</li>
+                </ul>
+                
+                <h4>Strategy Tips</h4>
+                <ul>
+                    <li>Higher odds of zilching with fewer dice</li>
+                    <li>Consider banking when you have a good score</li>
+                    <li>Scoring all 6 dice gives you another roll!</li>
+                </ul>
+            </div>
+            <button id="close-rules" class="btn btn-primary">Got It!</button>
+        </div>
+    </div>
+
+    <script src="js/game.js"></script>
+</body>
+</html>

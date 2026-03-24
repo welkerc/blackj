@@ -50,6 +50,18 @@
                 </div>
                 <span class="play-btn">Play Now</span>
             </a>
+
+            <a href="zilch/" class="game-card">
+                <div class="game-icon">🎲</div>
+                <h2>Zilch</h2>
+                <p>Push your luck dice game - bank points or zilch!</p>
+                <div class="game-features">
+                    <span>Roll & Score</span>
+                    <span>Push Your Luck</span>
+                    <span>10K to Win</span>
+                </div>
+                <span class="play-btn">Play Now</span>
+            </a>
         </div>
 
         <section class="rules-section">
@@ -109,6 +121,23 @@
                         <li><strong>Scoring:</strong> Cards remaining = points (10s = 25 pts). Lowest score wins!</li>
                     </ul>
                     <p><strong>Tip:</strong> Save those tens until you need them!</p>
+                </div>
+
+                <button class="rules-header" onclick="toggleRules('zilch-rules')">
+                    <span>🎲 Zilch Rules</span>
+                    <span class="arrow">▼</span>
+                </button>
+                <div id="zilch-rules" class="rules-content hidden">
+                    <p><strong>Objective:</strong> Be the first to reach 10,000 points!</p>
+                    <ul>
+                        <li><strong>Roll:</strong> Roll 6 dice</li>
+                        <li><strong>Score:</strong> Select scoring dice (1s=100, 5s=50, triples+)</li>
+                        <li><strong>Decision:</strong> Bank points or roll remaining dice</li>
+                        <li><strong>Zilch:</strong> Roll no scoring dice = lose all turn points!</li>
+                        <li><strong>Turnover:</strong> Score all 6 dice = roll all 6 again!</li>
+                    </ul>
+                    <p><strong>Scoring:</strong> 1=100, 5=50, Three of a kind=number×100, Three 1s=1000, Three pairs=1000, Straight=1000</p>
+                    <p><strong>Tip:</strong> Know when to bank - zilching hurts more with higher turn scores!</p>
                 </div>
             </div>
         </section>

@@ -2,7 +2,7 @@
 
 > **Built with [OpenCode](https://opencode.ai)** — Vibecoded with AI assistance.
 
-A collection of browser-based card games with a dark theme.
+A collection of browser-based card and dice games with a dark theme.
 
 ## Games
 
@@ -67,12 +67,33 @@ A fast-paced card game where you race to play all your cards.
 
 ---
 
+### Zilch
+A push-your-luck dice game where you bank points or risk zilching!
+
+**Play:** [https://welkerc.github.io/CardGames/zilch/](https://welkerc.github.io/CardGames/zilch/)
+
+**Features:**
+- Roll 6 dice and select scoring combinations
+- Bank points or roll for more
+- Zilch = lose all turn points!
+- Score all 6 dice = roll again
+- High score tracking with localStorage
+
+**Rules:**
+- 1 = 100 points, 5 = 50 points
+- Three of a kind = Number × 100
+- Three 1s = 1000, Three pairs = 1000, Straight = 1000
+- First to 10,000 wins!
+
+---
+
 ## Play Locally
 
 Open any game folder in a browser:
 - `blackjack/index.html`
 - `war/index.html`
 - `cleardeck/index.html`
+- `zilch/index.html`
 
 ## GitHub Pages
 
@@ -85,6 +106,7 @@ This repo is configured for GitHub Pages hosting.
    - `https://welkerc.github.io/CardGames/blackjack/`
    - `https://welkerc.github.io/CardGames/war/`
    - `https://welkerc.github.io/CardGames/cleardeck/`
+   - `https://welkerc.github.io/CardGames/zilch/`
 
 ## Tech Stack
 
