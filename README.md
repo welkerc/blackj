@@ -27,25 +27,6 @@ A classic casino card game with betting and strategy.
 
 ---
 
-### War
-A simple card game of luck vs the dealer.
-
-**Play:** [https://welkerc.github.io/CardGames/war/](https://welkerc.github.io/CardGames/war/)
-
-**Features:**
-- Full 52-card deck
-- War mechanic when cards tie
-- Multiple wars possible
-- Session statistics
-- localStorage persistence
-
-**Rules:**
-- Higher card wins both
-- Ties trigger war (3 face-down + 1 face-up)
-- Game ends when one player has all cards
-
----
-
 ### Clear the Deck
 A fast-paced card game where you race to play all your cards.
 
@@ -64,6 +45,46 @@ A fast-paced card game where you race to play all your cards.
 - 4+ of same value clears the deck
 - Higher value = take the pile
 - Tens are wild (25 points if held at end)
+
+---
+
+### Klondike
+Classic single-player solitaire with Draw 1 or Draw 3 modes.
+
+**Play:** [https://welkerc.github.io/CardGames/klondike/](https://welkerc.github.io/CardGames/klondike/)
+
+**Features:**
+- Draw 1 or Draw 3 mode selection
+- Click-to-move or drag cards between piles
+- Double-click to auto-move to foundation
+- Undo support (up to 50 moves)
+- Hint system highlights valid moves
+- Move counter and games won tracking
+
+**Rules:**
+- Build foundations Ace to King by suit
+- Build tableau down in alternating colors
+- Only Kings can fill empty columns
+- Draw 1 is easier, Draw 3 is more challenging
+
+---
+
+### War
+A simple card game of luck vs the dealer.
+
+**Play:** [https://welkerc.github.io/CardGames/war/](https://welkerc.github.io/CardGames/war/)
+
+**Features:**
+- Full 52-card deck
+- War mechanic when cards tie
+- Multiple wars possible
+- Session statistics
+- localStorage persistence
+
+**Rules:**
+- Higher card wins both
+- Ties trigger war (3 face-down + 1 face-up)
+- Game ends when one player has all cards
 
 ---
 
@@ -90,10 +111,11 @@ A push-your-luck dice game where you bank points or risk zilching!
 ## Play Locally
 
 Open any game folder in a browser:
-- `blackjack/index.html`
-- `war/index.html`
-- `cleardeck/index.html`
-- `zilch/index.html`
+- `docs/blackjack/index.html`
+- `docs/cleardeck/index.html`
+- `docs/klondike/index.html`
+- `docs/war/index.html`
+- `docs/zilch/index.html`
 
 ## GitHub Pages
 
@@ -104,8 +126,9 @@ This repo is configured for GitHub Pages hosting.
 3. Source: Deploy from a branch → `main` / `docs` folder
 4. Access games at:
    - `https://welkerc.github.io/CardGames/blackjack/`
-   - `https://welkerc.github.io/CardGames/war/`
    - `https://welkerc.github.io/CardGames/cleardeck/`
+   - `https://welkerc.github.io/CardGames/klondike/`
+   - `https://welkerc.github.io/CardGames/war/`
    - `https://welkerc.github.io/CardGames/zilch/`
 
 ## Tech Stack
